@@ -1,6 +1,7 @@
 hi this is a new file
 this change from github and i want to retest the changes for commit in local repo.
 this change added from github and it is local repo
+this change added from github. it is added again.
 
 new branch changes
 
