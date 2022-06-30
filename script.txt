@@ -1,2 +1,8 @@
+<<<<<<< HEAD
+=======
 hi this is a new file
 this change from github
+
+this is a new line for feature branch.
+dfdf
+>>>>>>> dee05fd569f6e21eb07703e145acb5bbfd56ecad
