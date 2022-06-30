@@ -1,5 +1,6 @@
 his let is a new line3 bit i want make it another line
 new line added line2 i want make it another line here
 added line 4 git is good
+added line 4 i am doing change here
 added line #5
 added line #6
