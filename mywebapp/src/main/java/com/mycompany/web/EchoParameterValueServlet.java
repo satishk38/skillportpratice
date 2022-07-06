@@ -18,6 +18,8 @@ public class EchoParameterValueServlet extends HttpServlet {
 		resp.getWriter().println(echo);
 		resp.setStatus(HttpServletResponse.SC_OK);
 		
+		System.out.println("*** do get**");
+		
 	}
 
 }
