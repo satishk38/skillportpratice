@@ -33,6 +33,7 @@ price FLOAT(5,2) DEFAULT NULL
 
 select * from rooms;
 
+C:\Users\satish.pallabothu\Documents\sportsDB.sql
 drop table bookings;
 create table bookings
 (
@@ -271,3 +272,45 @@ call seach_room('Tennis Court','2017-12-26','13:00:00');
 
 
 select * from bookings;
+
+drop procedure if exists cancel_booking
+DELIMITER $$
+create procedure cancel_booking(IN p_booking_id INT, OUT p_message VARCHAR(250))
+BEGIN
+
+declare v_cancellation int;
+declare v_member_id VARCHAR(225);
+declare v_payment_status  VARCHAR(225);
+declare v_booked_date DATE;
+declare v_price FLOAT(5,2);
+declare v_payment_due FLOAT(5,3);
+
+SET v_cancellation=0;
+
+select member_id, booked_date, price, payment_status INTO
+v_member_id, v_booked_date, v_price , v_payment_status
+ from member_bookings where id = p_booking_id;
+ 
+select payment_due INTO  v_payment_due from members WHERE id = v_member_id;
+ 
+ IF curdate() >= v_booked_date THEN
+  SELECT 'Cancellation cannot be done on/after the
+booked date' INTO p_message;
+  ELSEIF v_payment_status = 'Cancelled' OR
+v_payment_status = 'Paid' THEN
+    SELECT 'Booking has already been cancelled or
+paid' INTO p_message;
+  ELSE
+     UPDATE  bookings set payment_status='Cancelled' where id = p_booking_id;
+     SET  v_payment_due = v_payment_due - v_price;
+     UPDATE members set payment_due=v_payment_due WHERE id = v_member_id;
+         SELECT 'Booking has been cancelled' INTO p_message;
+ END IF;
+ 
+END $$
+
+DELIMITER ;
+
+
+call cancel_booking(1,@message);
+
