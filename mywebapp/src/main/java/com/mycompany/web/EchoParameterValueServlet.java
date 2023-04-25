@@ -20,6 +20,7 @@ public class EchoParameterValueServlet extends HttpServlet {
 		
 		System.out.println("*** do get**");
 		System.out.println("*** do get**");
+		System.out.println("*** do get next time**");
 		
 	  // comment
 	}
